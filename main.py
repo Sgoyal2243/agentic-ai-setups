@@ -14,7 +14,7 @@ class Message(BaseModel):
 @app.post("/hello")
 def hello_agent(message: Message):
     response = client.chat.completions.create(
-        model="llama3-8b-8192",  # fast and free model
+        model="llama-3.1-8b-instant",  # fast and free model
         messages=[
             {"role": "user", "content": message.content}
         ]
@@ -37,5 +37,6 @@ def hello_get_agent():
     return {
         "response": response.choices[0].message.content
     }
+
 
 
