@@ -54,13 +54,16 @@ async def telegram_webhook(request: Request):
     user_text = message.get("text", "")
     user_id = str(message["from"]["id"])
 
+    print(f"Received message from user {user_id}: {user_text}")
     # Send user input to AI agent
     try:
-        response = requests.post(
-            url="https://agentic-ai-setups.onrender.com/hello",  # internal call to your own endpoint
-            json={"content": user_text, "user_id": user_id}
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",  # fast and free model
+            messages=[
+                {"role": "user", "content": user_text}
+            ]
         )
-        ai_reply = response.json().get("response", "Sorry, something went wrong.")
+        ai_reply = response.choices[0].message.content
     except Exception as e:
         ai_reply = f"Error: {e}"
 
