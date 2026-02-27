@@ -6,7 +6,7 @@ import os
 app = FastAPI()
 
 # Initialize Groq client
-client = Groq(api_key=os.getenv('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'))
+client = Groq(api_key=os.getenv('GROQ_API_KEY'))
 
 class Message(BaseModel):
     content: str
@@ -22,4 +22,5 @@ def hello_agent(message: Message):
 
     return {
         "response": response.choices[0].message.content
+
     }
