@@ -24,3 +24,11 @@ def hello_agent(message: Message):
         "response": response.choices[0].message.content
 
     }
+
+@app.get("/helloget")
+def hello_get_agent():
+    return {
+        "response": "hanji"
+
+    }
+
